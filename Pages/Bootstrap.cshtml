@@ -1,5 +1,5 @@
 @page
-@Model Bootstrap
+@model BootstrapModel
 @{
     ViewData["Title"] = "Bootstrap";
 }
@@ -10,12 +10,19 @@
 	<div class="col-4 border border-danger"> 
         <form method="post">
         <div class="form-group">
-            <label class="control-label">First Name</label>
-            <input class="form-control" />
+            <label asp-for="FirstName" class="control-label"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label class="control-label">Last Name</label>
-            <input class="form-control" />
+            <label asp-for="LastName" class="control-label"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreditCard" class="control-label"></label>
+            <input asp-for="CreditCard" class="form-control" />
+            <span asp-validation-for="CreditCard" class="text-danger"></span>
         </div>
         <div class="form-group">
             <input type="submit" value="Submit" class="btn btn-primary" />
@@ -29,13 +36,16 @@
 </div>
 <div class="row">
     <div class="col-4 border border-primary">
-    Row Two Column One
+    @Model.FirstName
     </div>
     <div class="col-5 border border-primary">
-    Row Two Column Two
+    @Model.LastName
     </div>
     <div class="col-3 border border-primary">
-    Row Two Column Three
+    @Model.CreditCard
     </div>
 </div>
 
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
